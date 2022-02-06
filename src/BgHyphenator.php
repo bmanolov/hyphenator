@@ -33,6 +33,13 @@ class BgHyphenator {
 		return $this->hyphenDecode($hyphenWord);
 	}
 
+	public function getSyllablesForWords(array $words): array {
+		$hyphenatedWords = array_map(function(string $word) {
+			return $this->getSyllables($word);
+		}, $words);
+		return array_combine($words, $hyphenatedWords);
+	}
+
 	private function hyphenEncode($word) {
 		return iconv('UTF-8', 'windows-1251', $word);
 	}
